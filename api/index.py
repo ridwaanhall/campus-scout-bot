@@ -11,7 +11,7 @@ def index():
             if not msg:
                 return jsonify({'error': 'Invalid input'}), 400
 
-            chat_id, incoming_question = Message.message_parser(msg)
+            chat_id, incoming_question = Message.process_message(msg)
             answer = Answer.generate_answer(incoming_question)
             Message.send_message_telegram(chat_id, answer)
             return Response('ok', status=200)
