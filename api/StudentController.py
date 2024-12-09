@@ -35,7 +35,7 @@ class Answer:
         result = "\n ---- LIST MAHASISWA ----\n"
         for mahasiswa in mahasiswa_list:
             result += (
-                f"Detail: /{mahasiswa.get('id', 'N/A')}\n"
+                f"Detail: <code>/{mahasiswa.get('id', 'N/A')}</code>\n"
                 f"Name: {mahasiswa.get('nama', 'N/A')}\n"
                 f"NIM: {mahasiswa.get('nim', 'N/A')}\n"
                 f"College: {mahasiswa.get('nama_pt', 'N/A')}\n"
@@ -66,7 +66,7 @@ class Message:
     @staticmethod
     def send_message_telegram(chat_id, text):
         url = f'https://api.telegram.org/bot{TELE_BOT_TOKEN}/sendMessage'
-        payload = {'chat_id': chat_id, 'text': f'```{text}```', 'parse_mode': 'Markdown'}
+        payload = {'chat_id': chat_id, 'text': text, 'parse_mode': 'HTML'}
         response = requests.post(url, json=payload)
         response_data = response.json()
         print("Response from Telegram: ", response_data)
@@ -74,7 +74,7 @@ class Message:
         if not response_data.get('ok'):
             if response_data.get('error_code') == 400 and 'message is too long' in response_data.get('description', ''):
                 text = text[:4096]  # Truncate the message to the maximum allowed length
-                payload['text'] = f'```{text}```'
+                payload['text'] = text
                 response = requests.post(url, json=payload)
                 print("Response from Telegram after truncation: ", response.json())
         
