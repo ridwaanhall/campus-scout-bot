@@ -35,11 +35,12 @@ class Answer:
         result = "---- LIST MAHASISWA ----\n"
         for mahasiswa in mahasiswa_list:
             result += (
-                f"<b>ID</b>: /{mahasiswa.get('id', 'N/A')}\n"
-                f"<b>NIM</b>: {mahasiswa.get('nim', 'N/A')}\n"
-                f"<b>Name</b>: {mahasiswa.get('nama', 'N/A')}\n"
-                f"<b>College</b>: {mahasiswa.get('nama_pt', 'N/A')}\n"
-                f"<b>Study Program</b>: {mahasiswa.get('nama_prodi', 'N/A')}\n\n"
+                # f"ID: {mahasiswa.get('id', 'N/A')}\n"
+                f"NIM: {mahasiswa.get('nim', 'N/A')}\n"
+                f"Name: {mahasiswa.get('nama', 'N/A')}\n"
+                f"Study Program: {mahasiswa.get('nama_prodi', 'N/A')}\n\n"
+                f"College: {mahasiswa.get('nama_pt', 'N/A')} ({mahasiswa.get('sinkatan_pt', 'N/A')})\n"
+                # f"College Abbreviation: \n"
             )
         return result
 
