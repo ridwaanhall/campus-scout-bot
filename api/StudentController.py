@@ -1,5 +1,8 @@
 import os
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
 
 DATA_API = os.getenv('DATA_API')
 TELE_BOT_TOKEN = os.getenv('TELE_BOT_TOKEN')
