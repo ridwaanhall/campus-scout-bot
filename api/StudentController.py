@@ -35,12 +35,20 @@ class Answer:
         result = "\n ---- LIST MAHASISWA ----\n"
         for mahasiswa in mahasiswa_list:
             result += (
-                f"Detail: <code>/{mahasiswa.get('id', 'N/A')}</code>\n"
-                f"Name: {mahasiswa.get('nama', 'N/A')}\n"
-                f"NIM: {mahasiswa.get('nim', 'N/A')}\n"
-                f"College: {mahasiswa.get('nama_pt', 'N/A')}\n"
-                f"Study Program: {mahasiswa.get('nama_prodi', 'N/A')}\n\n"
+                "<tr><th>ID</th><th>Name</th><th>NIM</th><th>College</th><th>Study Program</th></tr>"
             )
+
+            for mahasiswa in mahasiswa_list:
+                result += (
+                    "<tr>"
+                    f"<td><code>/{mahasiswa.get('id', 'N/A')}</code></td>"
+                    f"<td>{mahasiswa.get('nama', 'N/A')}</td>"
+                    f"<td>{mahasiswa.get('nim', 'N/A')}</td>"
+                    f"<td>{mahasiswa.get('nama_pt', 'N/A')}</td>"
+                    f"<td>{mahasiswa.get('nama_prodi', 'N/A')}</td>"
+                    "</tr>"
+                )
+            result += "</table>"
         return result
 
     @staticmethod
