@@ -22,10 +22,11 @@ class Answer:
     @staticmethod
     def _search_students(query):
         url = f'{DATA_API}search/all/{query}'
-        response = requests.get(url)
-        
-        if response.status_code != 200:
-            return "Data not Found!"
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+        except requests.RequestException as e:
+            return f"An error occurred: {e}"
         
         mahasiswa_list = response.json().get("mahasiswa", [])
         if not mahasiswa_list:
