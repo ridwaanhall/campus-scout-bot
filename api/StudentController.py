@@ -50,7 +50,7 @@ class Answer:
 class Message:
 
     @staticmethod
-    def message_parser(message):
+    def process_message(message):
         chat_id = message['message']['chat']['id']
         text = message['message'].get('text', None)
         
@@ -68,5 +68,14 @@ class Message:
         url = f'https://api.telegram.org/bot{TELE_BOT_TOKEN}/sendMessage'
         payload = {'chat_id': chat_id, 'text': f'```{text}```', 'parse_mode': 'Markdown'}
         response = requests.post(url, json=payload)
-        print("Response from Telegram: ", response.json())
-        return response
+        response_data = response.json()
+        print("Response from Telegram: ", response_data)
+        
+        if not response_data.get('ok'):
+            if response_data.get('error_code') == 400 and 'message is too long' in response_data.get('description', ''):
+                text = text[:4096]  # Truncate the message to the maximum allowed length
+                payload['text'] = f'```{text}```'
+                response = requests.post(url, json=payload)
+                print("Response from Telegram after truncation: ", response.json())
+        
+        return response.json()
