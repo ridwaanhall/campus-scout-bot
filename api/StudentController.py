@@ -67,13 +67,19 @@ class Message:
     def send_message_telegram(chat_id, text):
         url = f'https://api.telegram.org/bot{TELE_BOT_TOKEN}/sendMessage'
         payload = {'chat_id': chat_id, 'text': text, 'parse_mode': 'HTML'}
+        
+        # Truncate the message before adding HTML tags
+        if len(text) > 4096:
+            text = text[:4096]
+        
         response = requests.post(url, json=payload)
         response_data = response.json()
         print("Response from Telegram: ", response_data)
         
         if not response_data.get('ok'):
             if response_data.get('error_code') == 400 and 'message is too long' in response_data.get('description', ''):
-                text = text[:4096]  # Truncate the message to the maximum allowed length
+                # Truncate the message again if necessary
+                text = text[:4096]
                 payload['text'] = text
                 response = requests.post(url, json=payload)
                 print("Response from Telegram after truncation: ", response.json())
