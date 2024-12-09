@@ -14,10 +14,21 @@ class Answer:
         if not message:
             return "Empty message."
         
-        if message.startswith("/"):
+        if message == "/start":
+            return Answer._start_message()
+        elif message.startswith("/"):
             return Answer._get_student_detail(message[1:])
         else:
             return Answer._search_students(message)
+
+    @staticmethod
+    def _start_message():
+        return (
+            "Welcome to the Student Information Bot!\n"
+            "You can search for students by sending a message with their name or NIM.\n"
+            "To get details of a specific student, send a message with their ID in the format /ID.\n"
+            "For example, to get details of a student with ID 123, send /123."
+        )
 
     @staticmethod
     def _search_students(query):
@@ -38,8 +49,8 @@ class Answer:
                 # f"ID: {mahasiswa.get('id', 'N/A')}\n"
                 f"NIM: {mahasiswa.get('nim', 'N/A')}\n"
                 f"Name: {mahasiswa.get('nama', 'N/A')}\n"
-                f"Study Program: {mahasiswa.get('nama_prodi', 'N/A')}\n\n"
-                f"College: {mahasiswa.get('nama_pt', 'N/A')} ({mahasiswa.get('sinkatan_pt', 'N/A')})\n"
+                f"Study Program: {mahasiswa.get('nama_prodi', 'N/A')}\n"
+                f"College: {mahasiswa.get('nama_pt', 'N/A')} ({mahasiswa.get('sinkatan_pt', 'N/A')})\n\n"
                 # f"College Abbreviation: \n"
             )
         return result
