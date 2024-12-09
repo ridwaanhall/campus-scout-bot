@@ -45,58 +45,7 @@ class Answer:
 
     @staticmethod
     def _get_student_detail(student_id):
-        url = f'{DATA_API}detail_student/{student_id}'
-        response = requests.get(url)
-        
-        if response.status_code != 200:
-            return "Data not Found!"
-        
-        data = response.json()
-        dataumum = data.get("dataumum", {})
-        datastatuskuliah = data.get("datastatuskuliah", [])
-        datastudi = data.get("datastudi", [])
-
-        result = (
-            f" ----------- DATA UMUM -----------\n"
-            f"Name: {dataumum.get('nm_pd', 'N/A')}\n"
-            f"Gender: {dataumum.get('jk', 'N/A')}\n"
-            f"nipd: {dataumum.get('nipd', 'N/A')}\n"
-            f"Degree: {dataumum.get('namajenjang', 'N/A')}\n"
-            f"Study Program: {dataumum.get('namaprodi', 'N/A')}\n"
-            f"College Name: {dataumum.get('namapt', 'N/A')}\n"
-            f"Sign Up Type: {dataumum.get('nm_jns_daftar', 'N/A')}\n"
-            f"reg_pd: {dataumum.get('reg_pd', 'N/A')}\n"
-            f"From College Name: {dataumum.get('nm_pt_asal', 'N/A')}\n"
-            f"From SP Name: {dataumum.get('nm_prodi_asal', 'N/A')}\n"
-            f"Desc Out: {dataumum.get('ket_keluar', 'N/A')}\n"
-            f"Date Out: {dataumum.get('tgl_keluar', 'N/A')}\n"
-            f"Serial Number Ijazah: {dataumum.get('no_seri_ijazah', 'N/A')}\n"
-            f"Prof: {dataumum.get('sert_prof', 'N/A')}\n"
-            f"Start: {dataumum.get('mulai_smt', 'N/A')}\n"
-        )
-
-        if datastatuskuliah:
-            result += "\n ---- DATA STATUS KULIAH ----\n"
-            for status in datastatuskuliah:
-                result += (
-                    f"\nID SMT : {status['id_smt']}\n"
-                    f"SKS    : {status['sks_smt']}\n"
-                    f"Status : {status['nm_stat_mhs']}\n"
-                )
-
-        if datastudi:
-            result += "\n -------- DATA STUDY --------\n"
-            for study in datastudi:
-                result += (
-                    f"\nCode MK: {study['kode_mk']}\n"
-                    f"Name MK: {study['nm_mk']}\n"
-                    f"SKS: {study['sks_mk']}\n"
-                    f"ID SMT: {study['id_smt']}\n"
-                    f"Grade: {study['nilai_huruf']}\n"
-                )
-
-        return result
-
+        pass
 
 class Message:
 
