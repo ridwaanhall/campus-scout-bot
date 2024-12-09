@@ -68,4 +68,5 @@ class Message:
         url = f'https://api.telegram.org/bot{TELE_BOT_TOKEN}/sendMessage'
         payload = {'chat_id': chat_id, 'text': f'```{text}```', 'parse_mode': 'Markdown'}
         response = requests.post(url, json=payload)
+        print("Response from Telegram: ", response.json())
         return response
