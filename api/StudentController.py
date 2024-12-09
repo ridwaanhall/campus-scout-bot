@@ -34,13 +34,13 @@ class Answer:
             return "Data not Found!"
         
         table = PrettyTable()
-        table.field_names = ["ID", "Name", "NIM", "College", "Study Program"]
+        table.field_names = ["NIM", "Name", "College", "Study Program"]
         
         for mahasiswa in mahasiswa_list:
+            nim_with_id = f"<a href='/{mahasiswa.get('id', 'N/A')}'>{mahasiswa.get('nim', 'N/A')}</a>"
             table.add_row([
-                f"/{mahasiswa.get('id', 'N/A')}",
+                nim_with_id,
                 mahasiswa.get('nama', 'N/A'),
-                mahasiswa.get('nim', 'N/A'),
                 mahasiswa.get('nama_pt', 'N/A'),
                 mahasiswa.get('nama_prodi', 'N/A')
             ])
