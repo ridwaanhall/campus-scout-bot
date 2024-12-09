@@ -1,5 +1,5 @@
 from flask import Flask, Response, request, jsonify
-from Controller.StudentController import Answer, Message
+from api.StudentController import Answer, Message
 
 app = Flask(__name__)
 
