@@ -1,7 +1,6 @@
 import os
 import requests
 from dotenv import load_dotenv
-from prettytable import PrettyTable
 
 load_dotenv()
 
@@ -33,19 +32,15 @@ class Answer:
         if not mahasiswa_list:
             return "Data not Found!"
         
-        table = PrettyTable()
-        table.field_names = ["NIM", "Name", "College", "Study Program"]
-        
+        result = "---- LIST MAHASISWA ----\n"
         for mahasiswa in mahasiswa_list:
-            nim_with_id = f"<a href='/{mahasiswa.get('id', 'N/A')}'>{mahasiswa.get('nim', 'N/A')}</a>"
-            table.add_row([
-                nim_with_id,
-                mahasiswa.get('nama', 'N/A'),
-                mahasiswa.get('nama_pt', 'N/A'),
-                mahasiswa.get('nama_prodi', 'N/A')
-            ])
-        
-        return f"<pre>{table}</pre>"
+            result += (
+                f"Name: {mahasiswa.get('nama', 'N/A')}\n"
+                f"NIM: <a href='/{mahasiswa.get('id', 'N/A')}'>{mahasiswa.get('nim', 'N/A')}</a>\n"
+                f"College: {mahasiswa.get('nama_pt', 'N/A')}\n"
+                f"Study Program: {mahasiswa.get('nama_prodi', 'N/A')}\n\n"
+            )
+        return result
 
     @staticmethod
     def _get_student_detail(student_id):
